@@ -5,6 +5,7 @@ import java.util.concurrent.Executor;
 
 import javax.annotation.WillNotClose;
 
+import tech.ydb.common.transaction.YdbTransaction;
 import tech.ydb.core.Result;
 import tech.ydb.core.Status;
 import tech.ydb.core.grpc.GrpcTransport;
@@ -25,6 +26,7 @@ import tech.ydb.topic.settings.ReaderSettings;
 import tech.ydb.topic.settings.WriterSettings;
 import tech.ydb.topic.write.AsyncWriter;
 import tech.ydb.topic.write.SyncWriter;
+import tech.ydb.topic.write.WriteStream;
 
 
 /**
@@ -160,6 +162,15 @@ public interface TopicClient extends AutoCloseable {
      * @return topic {@link AsyncWriter}
      */
     AsyncWriter createAsyncWriter(WriterSettings settings);
+
+    WriteStream openWriteStream();
+
+    TopicWriter.Builder createTopicWriter(String topicPath, String producerId);
+
+    TopicWriter.Builder createTopicTransactionWriter(YdbTransaction tx, String topicPath);
+
+    TopicWriter.Builder createTopicWriterWithoutDeduplication(String topicPath);
+
 
     @Override
     void close();

@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tech.ydb.common.transaction.YdbTransaction;
 import tech.ydb.core.Result;
 import tech.ydb.core.Status;
 import tech.ydb.core.grpc.GrpcRequestSettings;
@@ -23,6 +24,7 @@ import tech.ydb.core.utils.ProtobufUtils;
 import tech.ydb.proto.topic.YdbTopic;
 import tech.ydb.topic.TopicClient;
 import tech.ydb.topic.TopicRpc;
+import tech.ydb.topic.TopicWriter;
 import tech.ydb.topic.description.Codec;
 import tech.ydb.topic.description.Consumer;
 import tech.ydb.topic.description.ConsumerDescription;
@@ -50,6 +52,8 @@ import tech.ydb.topic.settings.WriterSettings;
 import tech.ydb.topic.utils.ProtoUtils;
 import tech.ydb.topic.write.AsyncWriter;
 import tech.ydb.topic.write.SyncWriter;
+import tech.ydb.topic.write.WriteStream;
+import tech.ydb.topic.write.WriteStreamImpl;
 import tech.ydb.topic.write.impl.AsyncWriterImpl;
 import tech.ydb.topic.write.impl.SyncWriterImpl;
 
@@ -331,6 +335,26 @@ public class TopicClientImpl implements TopicClient {
     @Override
     public AsyncWriter createAsyncWriter(WriterSettings settings) {
         return new AsyncWriterImpl(topicRpc, settings, compressionExecutor);
+    }
+
+    @Override
+    public WriteStream openWriteStream() {
+        return new WriteStreamImpl();
+    }
+
+    @Override
+    public TopicWriter.Builder createTopicWriter(String topicPath, String producerId) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public TopicWriter.Builder createTopicWriterWithoutDeduplication(String topicPath) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public TopicWriter.Builder createTopicTransactionWriter(YdbTransaction tx, String topicPath) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private static YdbTopic.MeteringMode toProto(MeteringMode meteringMode) {
