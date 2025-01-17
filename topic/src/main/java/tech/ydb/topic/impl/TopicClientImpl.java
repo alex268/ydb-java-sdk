@@ -53,9 +53,9 @@ import tech.ydb.topic.utils.ProtoUtils;
 import tech.ydb.topic.write.AsyncWriter;
 import tech.ydb.topic.write.SyncWriter;
 import tech.ydb.topic.write.WriteStream;
-import tech.ydb.topic.write.WriteStreamImpl;
 import tech.ydb.topic.write.impl.AsyncWriterImpl;
 import tech.ydb.topic.write.impl.SyncWriterImpl;
+import tech.ydb.topic.write.impl.WriteStreamImpl;
 
 /**
  * @author Nikolay Perfilov
@@ -339,7 +339,7 @@ public class TopicClientImpl implements TopicClient {
 
     @Override
     public WriteStream openWriteStream() {
-        return new WriteStreamImpl();
+        return new WriteStreamImpl(topicRpc);
     }
 
     @Override

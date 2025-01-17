@@ -21,7 +21,7 @@ public class InitRequest {
         return this;
     }
 
-    YdbTopic.StreamWriteMessage.InitRequest toProtoMsg() {
+    public YdbTopic.StreamWriteMessage.InitRequest toProtoMsg() {
         return msg;
     }
 

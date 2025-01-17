@@ -7,7 +7,7 @@ import java.util.concurrent.CompletableFuture;
  * @author Aleksandr Gorshenin
  */
 public interface Compressor {
-    int getCodec();
+    int getCodecCode();
 
     CompletableFuture<byte[]> compress(byte[] data);
 }
