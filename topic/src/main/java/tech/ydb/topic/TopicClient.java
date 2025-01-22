@@ -9,6 +9,7 @@ import tech.ydb.common.transaction.YdbTransaction;
 import tech.ydb.core.Result;
 import tech.ydb.core.Status;
 import tech.ydb.core.grpc.GrpcTransport;
+import tech.ydb.topic.api.WriteStream;
 import tech.ydb.topic.description.ConsumerDescription;
 import tech.ydb.topic.description.TopicDescription;
 import tech.ydb.topic.impl.GrpcTopicRpc;
@@ -26,7 +27,6 @@ import tech.ydb.topic.settings.ReaderSettings;
 import tech.ydb.topic.settings.WriterSettings;
 import tech.ydb.topic.write.AsyncWriter;
 import tech.ydb.topic.write.SyncWriter;
-import tech.ydb.topic.write.WriteStream;
 
 
 /**
@@ -170,6 +170,8 @@ public interface TopicClient extends AutoCloseable {
     TopicWriter.Builder createTopicTransactionWriter(YdbTransaction tx, String topicPath);
 
     TopicWriter.Builder createTopicWriterWithoutDeduplication(String topicPath);
+
+    TopicIdempotentWriter.Builder createTopicIdempotentWriter(String topicPath, String producerId);
 
 
     @Override

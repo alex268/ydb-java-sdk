@@ -1,6 +1,8 @@
-package tech.ydb.topic.write;
+package tech.ydb.topic.impl;
 
 import java.util.concurrent.Semaphore;
+
+import tech.ydb.topic.api.QueuePolicy;
 
 /**
  *
@@ -24,6 +26,7 @@ public class BlockingQueuePolicy implements QueuePolicy {
                     "Message size " + messageSize + " is more than max size of queue " + maxMessagesSize
             );
         }
+
         try {
             size.acquire(messageSize);
             count.acquire(1);

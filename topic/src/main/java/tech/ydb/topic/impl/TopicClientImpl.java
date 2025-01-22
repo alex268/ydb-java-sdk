@@ -23,8 +23,10 @@ import tech.ydb.core.settings.BaseRequestSettings;
 import tech.ydb.core.utils.ProtobufUtils;
 import tech.ydb.proto.topic.YdbTopic;
 import tech.ydb.topic.TopicClient;
+import tech.ydb.topic.TopicIdempotentWriter;
 import tech.ydb.topic.TopicRpc;
 import tech.ydb.topic.TopicWriter;
+import tech.ydb.topic.api.WriteStream;
 import tech.ydb.topic.description.Codec;
 import tech.ydb.topic.description.Consumer;
 import tech.ydb.topic.description.ConsumerDescription;
@@ -52,7 +54,6 @@ import tech.ydb.topic.settings.WriterSettings;
 import tech.ydb.topic.utils.ProtoUtils;
 import tech.ydb.topic.write.AsyncWriter;
 import tech.ydb.topic.write.SyncWriter;
-import tech.ydb.topic.write.WriteStream;
 import tech.ydb.topic.write.impl.AsyncWriterImpl;
 import tech.ydb.topic.write.impl.SyncWriterImpl;
 import tech.ydb.topic.write.impl.WriteStreamImpl;
@@ -354,6 +355,11 @@ public class TopicClientImpl implements TopicClient {
 
     @Override
     public TopicWriter.Builder createTopicTransactionWriter(YdbTransaction tx, String topicPath) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public TopicIdempotentWriter.Builder createTopicIdempotentWriter(String topicPath, String producerId) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

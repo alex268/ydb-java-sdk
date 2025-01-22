@@ -1,9 +1,12 @@
-package tech.ydb.topic.write;
+package tech.ydb.topic.api;
 
 import java.util.List;
 
 import tech.ydb.common.transaction.YdbTransaction;
 import tech.ydb.core.Status;
+import tech.ydb.topic.write.InitRequest;
+import tech.ydb.topic.write.WriteAck;
+import tech.ydb.topic.write.WriteMsg;
 
 /**
  *
@@ -25,10 +28,6 @@ public interface WriteStream {
 
     default void write(int codec, List<WriteMsg> messages) {
         write(codec, null, messages);
-    }
-
-    default void write(List<WriteMsg> messages) {
-        write(CODEC_RAW, null, messages);
     }
 
     interface Handler {

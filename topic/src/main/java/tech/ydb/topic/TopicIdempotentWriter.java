@@ -6,29 +6,27 @@ import java.util.function.Function;
 
 import tech.ydb.topic.api.QueuePolicy;
 import tech.ydb.topic.api.RetryPolicy;
-import tech.ydb.topic.api.TypedWriter;
-import tech.ydb.topic.description.Codec;
+import tech.ydb.topic.api.TypedIdempotentWriter;
 
 /**
  *
  * @author Aleksandr Gorshenin
  */
-public interface TopicWriter extends TypedWriter<byte[]> {
+public interface TopicIdempotentWriter extends TypedIdempotentWriter<byte[]> {
 
     interface Builder {
         Builder addServerMetadata(byte[] key, byte[] value);
 
-        Builder withCodec(Codec codec);
         Builder withAckExecutor(Executor executor);
         Builder withQueuePolicy(QueuePolicy policy);
         Builder withRetryPolicy(RetryPolicy policy);
 
-        TopicWriter build();
+        TopicIdempotentWriter build();
 
-        <T> TypedWriter<T> toTypedWriter(Function<T, byte[]> mapper);
+        <T> TypedIdempotentWriter<T> toTypedSeqWriter(Function<T, byte[]> mapper);
 
-        default TypedWriter<String> toStringWriter() {
-            return toTypedWriter(s -> s.getBytes(StandardCharsets.UTF_8));
+        default TypedIdempotentWriter<String> toStringSeqWriter() {
+            return toTypedSeqWriter(s -> s.getBytes(StandardCharsets.UTF_8));
         }
     }
 }

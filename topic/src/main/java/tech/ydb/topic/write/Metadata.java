@@ -34,11 +34,11 @@ public class Metadata {
         return new Metadata(Instant.now(), Collections.emptyList());
     }
 
-    public static Metadata of(@Nonnull Instant createdAt) {
+    public static Metadata withCreatedAt(@Nonnull Instant createdAt) {
         return new Metadata(createdAt, Collections.emptyList());
     }
 
-    public Metadata withMetadataItem(@Nonnull String key, byte[] value) {
+    public Metadata withItem(@Nonnull String key, byte[] value) {
         MetadataItem item = new MetadataItem(key, value);
         if (items.isEmpty()) {
             return new Metadata(createdAt, Collections.singletonList(item));
@@ -49,7 +49,7 @@ public class Metadata {
         return new Metadata(createdAt, Collections.unmodifiableList(list));
     }
 
-    public Metadata withMetadataItems(List<MetadataItem> list) {
+    public Metadata withItems(List<MetadataItem> list) {
         if (list == null || list.isEmpty()) {
             return this;
         }

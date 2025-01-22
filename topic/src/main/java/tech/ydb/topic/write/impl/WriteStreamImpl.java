@@ -24,10 +24,10 @@ import tech.ydb.proto.topic.YdbTopic;
 import tech.ydb.proto.topic.YdbTopic.StreamWriteMessage.FromClient;
 import tech.ydb.proto.topic.YdbTopic.StreamWriteMessage.FromServer;
 import tech.ydb.topic.TopicRpc;
+import tech.ydb.topic.api.WriteStream;
 import tech.ydb.topic.write.InitRequest;
 import tech.ydb.topic.write.WriteAck;
 import tech.ydb.topic.write.WriteMsg;
-import tech.ydb.topic.write.WriteStream;
 
 /**
  *
