@@ -28,6 +28,11 @@ public class ZstdCodec implements Codec {
     }
 
     @Override
+    public String toString() {
+        return "ZstdCodec[com.github.luben.zstd]";
+    }
+
+    @Override
     public int getId() {
         return Codec.ZSTD;
     }

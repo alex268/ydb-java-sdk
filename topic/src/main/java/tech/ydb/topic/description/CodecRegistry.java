@@ -6,10 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import tech.ydb.topic.impl.GzipCodec;
-import tech.ydb.topic.impl.LzopCodec;
-import tech.ydb.topic.impl.RawCodec;
-import tech.ydb.topic.impl.ZstdCodec;
+import tech.ydb.topic.impl.StandardCodecs;
 
 /**
  * Register for custom topic codec. Local to TopicClient
@@ -24,10 +21,9 @@ public class CodecRegistry {
 
     public CodecRegistry() {
         customCodecMap = new HashMap<>();
-        customCodecMap.put(Codec.RAW, RawCodec.getInstance());
-        customCodecMap.put(Codec.GZIP, GzipCodec.getInstance());
-        customCodecMap.put(Codec.LZOP, LzopCodec.getInstance());
-        customCodecMap.put(Codec.ZSTD, ZstdCodec.getInstance());
+        for (Codec codec: StandardCodecs.getAvailableCodecs()) {
+            customCodecMap.put(codec.getId(), codec);
+        }
     }
 
     /**

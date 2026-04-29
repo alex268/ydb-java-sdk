@@ -18,6 +18,11 @@ public class GzipCodec implements Codec {
     private GzipCodec() {
     }
 
+    @Override
+    public String toString() {
+        return "GzipCodec[java.util.zip]";
+    }
+
     /**
      * Get single instance
      * @return single instance of RawCodec
