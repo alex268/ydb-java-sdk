@@ -4,43 +4,46 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.github.luben.zstd.ZstdInputStream;
+import com.github.luben.zstd.ZstdOutputStream;
+
 import tech.ydb.topic.description.Codec;
 
 /**
- * Default codec which don't do any encode and decode.
- *
+ * Compression codec which implements the ZSTD algorithm
  */
-public class RawCodec implements Codec {
-    private static final RawCodec INSTANCE = new RawCodec();
+public class ZstdBackwardCodec implements Codec {
 
-    private RawCodec() {
+    private static final ZstdBackwardCodec INSTANCE = new ZstdBackwardCodec();
+
+    private ZstdBackwardCodec() {
     }
 
     /**
      * Get single instance
      * @return single instance of RawCodec
      */
-    public static RawCodec getInstance() {
+    public static ZstdBackwardCodec getInstance() {
         return INSTANCE;
     }
 
     @Override
     public String toString() {
-        return "RawCodec";
+        return "ZstdBackwardCodec[com.github.luben.zstd]";
     }
 
     @Override
     public int getId() {
-        return Codec.RAW;
+        return Codec.ZSTD;
     }
 
     @Override
     public InputStream decode(InputStream byteArrayInputStream) throws IOException {
-        return byteArrayInputStream;
+        return new ZstdInputStream(byteArrayInputStream);
     }
 
     @Override
     public OutputStream encode(OutputStream byteArrayOutputStream) throws IOException {
-        return byteArrayOutputStream;
+        return new ZstdOutputStream(byteArrayOutputStream);
     }
 }

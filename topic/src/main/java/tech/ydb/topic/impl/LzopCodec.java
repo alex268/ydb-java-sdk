@@ -31,6 +31,11 @@ public class LzopCodec implements Codec {
     }
 
     @Override
+    public String toString() {
+        return "LzopCodec[org.anarres.lzo]";
+    }
+
+    @Override
     public int getId() {
         return Codec.LZOP;
     }
